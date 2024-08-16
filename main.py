@@ -45,7 +45,7 @@ ano_seleccionado = st.selectbox("Seleccione el gen", options=df['nombre-genes'].
 df_filtrado = df[df['nombre-genes'] == ano_seleccionado]
 
 # Mostrar el DataFrame filtrado en la interfaz de usuario
-st.subheader(f"Datos el gen seleccionado {ano_seleccionado}")
+st.subheader(f"Datos del gen seleccionado {ano_seleccionado}")
 
 # Opción para mostrar todos los valores
 mostrar_todos = st.checkbox("Mostrar todos los valores")
