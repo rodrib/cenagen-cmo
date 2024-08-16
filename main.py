@@ -15,7 +15,7 @@ with st.expander('Sobre esta app'):
   st.markdown('**¿Qué puede hacer esta aplicación??**')
   st.info('Esta aplicación muestra el uso de Pandas para la gestión de datos, Altair para la creación de gráficos y un marco de datos editable para la interacción de datos.')
   st.markdown('**How to use the app?**')
-  st.warning('To engage with the app, 1. Select genres of your interest in the drop-down selection box and then 2. Select the year duration from the slider widget. As a result, this should generate an updated editable DataFrame and line plot.')
+  st.warning('Para interactuar con la aplicación, 1. Seleccione el gen de su interés en el cuadro de selección')
 
 
 ##############
@@ -45,7 +45,7 @@ ano_seleccionado = st.selectbox("Seleccione el gen", options=df['nombre-genes'].
 df_filtrado = df[df['nombre-genes'] == ano_seleccionado]
 
 # Mostrar el DataFrame filtrado en la interfaz de usuario
-st.subheader(f"Datos para el año {ano_seleccionado}")
+st.subheader(f"Datos el gen seleccionado {ano_seleccionado}")
 
 # Opción para mostrar todos los valores
 mostrar_todos = st.checkbox("Mostrar todos los valores")
