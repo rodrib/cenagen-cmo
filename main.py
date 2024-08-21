@@ -62,21 +62,7 @@ st.write(ui.table)
 
 #### Graficos
 
-######
-# Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
-resumen_counts = df['CM'].value_counts().reset_index()
-resumen_counts.columns = ['CM', 'Cantidad']
 
-# Mostrar gráfico basado en Proyecto/tesis/Resumen
-st.subheader("Distribución de CM")
-with card_container(key="chart2"):
-    st.vega_lite_chart(resumen_counts, {
-        'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(29, 250, 173)', 'cornerRadiusEnd': 4 },
-        'encoding': {
-            'x': {'field': 'CM', 'type': 'ordinal', 'axis': {'title': 'Proyecto/tesis/Resumen'}},
-            'y': {'field': 'Cantidad', 'type': 'quantitative', 'axis': {'title': 'Cantidad', 'grid': False}},
-        },
-    }, use_container_width=True)
 
 
     # Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
