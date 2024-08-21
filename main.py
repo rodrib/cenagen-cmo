@@ -30,7 +30,7 @@ from streamlit_shadcn_ui import slider, input, textarea, radio_group, switch
 import pandas as pd
 
 # Especifica la ruta del archivo CSV
-file_path = 'df_completo1.csv'
+file_path = 'etl_cenagen1.csv'
 
 # Leer el archivo CSV y convertirlo en un DataFrame
 df = pd.read_csv(file_path)
