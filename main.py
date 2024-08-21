@@ -58,3 +58,67 @@ else:
 
 # Renderizar la tabla
 st.write(ui.table)
+
+
+#### Graficos
+
+######
+# Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
+resumen_counts = df['CM'].value_counts().reset_index()
+resumen_counts.columns = ['CM', 'Cantidad']
+
+# Mostrar gráfico basado en Proyecto/tesis/Resumen
+st.subheader("Distribución de CM")
+with card_container(key="chart2"):
+    st.vega_lite_chart(resumen_counts, {
+        'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(29, 250, 173)', 'cornerRadiusEnd': 4 },
+        'encoding': {
+            'x': {'field': 'CM', 'type': 'ordinal', 'axis': {'title': 'Proyecto/tesis/Resumen'}},
+            'y': {'field': 'Cantidad', 'type': 'quantitative', 'axis': {'title': 'Cantidad', 'grid': False}},
+        },
+    }, use_container_width=True)
+
+
+    # Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
+resumen_counts = df['CM'].value_counts().reset_index()
+resumen_counts.columns = ['CM', 'Cantidad']
+
+# Mostrar el conteo de valores para verificar
+st.write("Conteo de valores en 'CM':")
+#st.write(resumen_counts)
+
+ui.table(data=resumen_counts, maxHeight=300)
+
+st.write(ui.table)
+
+
+data = {
+    "CM": [
+        "0", "1", "sd", "2", "CO", "3", "CO bilat", 
+        "Melanoma", "unilat", "ca colorrectal", 
+        "CO unil izq", "0 (quiste benigno en ovario)", 
+        "CO unil", "2//1"
+    ],
+    "Cantidad": [34, 22, 22, 15, 9, 4, 2, 2, 1, 1, 1, 1, 1, 1]
+}
+
+
+# Crear el DataFrame
+df1 = pd.DataFrame(data)
+
+# Ordenar los datos por 'Cantidad' de mayor a menor
+df1 = df1.sort_values(by='Cantidad', ascending=False)
+
+# Obtener el orden de categorías
+category_order = df1['CM'].tolist()
+
+# Mostrar el gráfico basado en Proyecto/tesis/Resumen
+st.subheader("Distribución de CM")
+with card_container(key="chart2"):
+    st.vega_lite_chart(df1, {
+        'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(173, 250, 29)', 'cornerRadiusEnd': 4 },
+        'encoding': {
+            'x': {'field': 'CM', 'type': 'ordinal', 'axis': {'title': 'CM'}, 'sort': category_order},
+            'y': {'field': 'Cantidad', 'type': 'quantitative', 'axis': {'title': 'Cantidad', 'grid': False}},
+        },
+    }, use_container_width=True)
