@@ -197,3 +197,69 @@ with card_container(key="chart2"):
             'y': {'field': 'Cantidad', 'type': 'quantitative', 'axis': {'title': 'Cantidad', 'grid': False}},
         },
     }, use_container_width=True)
+
+#### Accesion
+
+
+
+# Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
+resumen_counts_accession = df['Accession'].value_counts().reset_index()
+resumen_counts_accession.columns = ['Accession', 'Cantidad']
+
+# Mostrar el conteo de valores para verificar
+st.write("Conteo de valores en 'Accession':")
+#st.write(resumen_counts)
+
+ui.table(data=resumen_counts_accession, maxHeight=300)
+
+# Datos proporcionados
+data_accesion = {
+    "Accession": [
+        "sd", "VCV000037569.", "VCV000037698.", "VCV000038043.", 
+        "VCV000219665.", "VCV000054398.", "VCV000005591.", "VCV000017674.", 
+        "VCV000054200.", "VCV000017661.", "VCV000017693.", "VCV000017677.", 
+        "VCV000491087.", "VCV000009322.", "VCV000055523.", "VCV000548311.", 
+        "VCV000055360.", "VCV000548237.", "VCV000038015.", "VCV000037691.", 
+        "VCV000037516.", "VCV000266170.", "VCV000037409.", "VCV000009342.", 
+        "VCV000054584.", "VCV000418999.", "VCV000017675.", "VCV000037786.", 
+        "VCV000548363.", "VCV000051070.", "VCV000038122.", "VCV000038242.", 
+        "VCV000052792.", "VCV000037636.", "VCV000234828.", "VCV000037623.", 
+        "VCV000055531.", "VCV000038082.", "VCV000229950.", "VCV000055157.", 
+        "VCV000052709.", "VCV000037616.", "VCV000055502.", "VCV000037429.", 
+        "VCV000185292.", "VCV000052122.", "VCV000038227.", "VCV000037406.", 
+        "VCV000037763."
+    ],
+    "Cantidad": [
+        11, 10, 6, 5, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    ]
+}
+
+
+# Verificar las longitudes de las listas
+print(f"Longitud de 'Accession': {len(data_accesion['Accession'])}")
+print(f"Longitud de 'Cantidad': {len(data_accesion['Cantidad'])}")
+
+# Convertir a DataFrame
+df_accesion = pd.DataFrame(data_accesion)
+
+
+
+
+# Ordenar los datos por 'Cantidad' de mayor a menor
+df_accesion = df_accesion.sort_values(by='Cantidad', ascending=False)
+
+# Obtener el orden de categorías
+category_order_accession = df_accesion['Accession'].tolist()
+
+# Mostrar el gráfico basado en Proyecto/tesis/Resumen
+st.subheader("Distribución de Variantes")
+with card_container(key="chart2"):
+    st.vega_lite_chart(df_accesion, {
+        'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(0, 153, 76)', 'cornerRadiusEnd': 4 },
+        'encoding': {
+            'x': {'field': 'Accession', 'type': 'ordinal', 'axis': {'title': 'Accession'}, 'sort': category_order_accession},
+            'y': {'field': 'Cantidad', 'type': 'quantitative', 'axis': {'title': 'Cantidad', 'grid': False}},
+        },
+    }, use_container_width=True)
