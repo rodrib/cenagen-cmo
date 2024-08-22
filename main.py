@@ -148,3 +148,52 @@ with card_container(key="chart2"):
             'y': {'field': 'Cantidad', 'type': 'quantitative', 'axis': {'title': 'Cantidad', 'grid': False}},
         },
     }, use_container_width=True)
+
+
+### EDAD
+
+# Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
+resumen_counts_edad = df['EDAD'].value_counts().reset_index()
+resumen_counts_edad.columns = ['EDAD', 'Cantidad']
+
+# Mostrar el conteo de valores para verificar
+st.write("Conteo de valores en 'EDAD':")
+#st.write(resumen_counts)
+
+ui.table(data=resumen_counts_edad, maxHeight=300)
+
+
+# Crear el diccionario con los datos
+data_edad = {
+    "EDAD": [
+        "sd", 37, 40, 38, 44, 64, 42, 45, 65, 57, 41, 29, 59, 43, 26, 
+        49, 53, 54, 51, 28, 61, 48, 22, 36, 50, "fallecida", 31, 19, 
+        17, 66, 32, 20, 39, 73, 56, 34, 27, 52, 70, 30, 16, 71, 35, 
+        18, 60
+    ],
+    "Cantidad": [
+        26, 7, 6, 5, 4, 4, 4, 3, 3, 3, 2, 2, 2, 2, 2, 
+        2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    ]
+}
+
+# Convertir a DataFrame
+df_edad = pd.DataFrame(data_edad)
+
+# Ordenar los datos por 'Cantidad' de mayor a menor
+df_edad = df_edad.sort_values(by='Cantidad', ascending=False)
+
+# Obtener el orden de categorías
+category_order_edad = df_edad['EDAD'].tolist()
+
+# Mostrar el gráfico basado en Proyecto/tesis/Resumen
+st.subheader("Distribución de EDAD")
+with card_container(key="chart2"):
+    st.vega_lite_chart(df_edad, {
+        'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(0, 153, 76)', 'cornerRadiusEnd': 4 },
+        'encoding': {
+            'x': {'field': 'EDAD', 'type': 'ordinal', 'axis': {'title': 'EDAD'}, 'sort': category_order_edad},
+            'y': {'field': 'Cantidad', 'type': 'quantitative', 'axis': {'title': 'Cantidad', 'grid': False}},
+        },
+    }, use_container_width=True)
