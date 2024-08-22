@@ -65,7 +65,7 @@ st.write(ui.table)
 
 
 
-    # Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
+# Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
 resumen_counts = df['CM'].value_counts().reset_index()
 resumen_counts.columns = ['CM', 'Cantidad']
 
@@ -105,6 +105,46 @@ with card_container(key="chart2"):
         'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(173, 250, 29)', 'cornerRadiusEnd': 4 },
         'encoding': {
             'x': {'field': 'CM', 'type': 'ordinal', 'axis': {'title': 'CM'}, 'sort': category_order},
+            'y': {'field': 'Cantidad', 'type': 'quantitative', 'axis': {'title': 'Cantidad', 'grid': False}},
+        },
+    }, use_container_width=True)
+
+### ETNIA
+
+# Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
+resumen_counts_etnia = df['ETNIA'].value_counts().reset_index()
+resumen_counts_etnia.columns = ['ETNIA', 'Cantidad']
+
+# Mostrar el conteo de valores para verificar
+st.write("Conteo de valores en 'ETNIA':")
+#st.write(resumen_counts)
+
+ui.table(data=resumen_counts_etnia, maxHeight=300)
+
+st.write(ui.table)
+
+# Crear el diccionario con los datos
+data_etnia = {
+    "ETNIA": ["sd", "1", "0", "0/1", "italianos"],
+    "Cantidad": [55, 43, 13, 4, 1]
+}
+
+# Convertir a DataFrame
+df_etnia = pd.DataFrame(data_etnia)
+
+# Ordenar los datos por 'Cantidad' de mayor a menor
+df_etnia = df_etnia.sort_values(by='Cantidad', ascending=False)
+
+# Obtener el orden de categorías
+category_order_etnia = df_etnia['ETNIA'].tolist()
+
+# Mostrar el gráfico basado en Proyecto/tesis/Resumen
+st.subheader("Distribución de ETNIA")
+with card_container(key="chart2"):
+    st.vega_lite_chart(df_etnia, {
+        'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(0, 153, 76)', 'cornerRadiusEnd': 4 },
+        'encoding': {
+            'x': {'field': 'ETNIA', 'type': 'ordinal', 'axis': {'title': 'ETNIA'}, 'sort': category_order_etnia},
             'y': {'field': 'Cantidad', 'type': 'quantitative', 'axis': {'title': 'Cantidad', 'grid': False}},
         },
     }, use_container_width=True)
