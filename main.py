@@ -263,3 +263,16 @@ with card_container(key="chart2"):
             'y': {'field': 'Cantidad', 'type': 'quantitative', 'axis': {'title': 'Cantidad', 'grid': False}},
         },
     }, use_container_width=True)
+
+
+### RECIDIVA
+
+# Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
+resumen_counts_recidiva = df['RECIDIVA'].value_counts().reset_index()
+resumen_counts_recidiva.columns = ['RECIDIVA', 'Cantidad']
+
+# Mostrar el conteo de valores para verificar
+st.write("Conteo de valores en 'RECIDIVA':")
+#st.write(resumen_counts)
+
+ui.table(data=resumen_counts_recidiva, maxHeight=300)
