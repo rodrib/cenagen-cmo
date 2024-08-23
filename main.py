@@ -276,3 +276,16 @@ st.write("Conteo de valores en 'RECIDIVA':")
 #st.write(resumen_counts)
 
 ui.table(data=resumen_counts_recidiva, maxHeight=300)
+
+# Datos proporcionados
+data_recidiva = {
+    "RECIDIVA": [
+        "sd", "0", "1", "CM der 2001, CO 2007, CM izq 2015"
+    ],
+    "Cantidad": [
+        109, 4, 2, 1
+    ]
+}
+
+# Crear el DataFrame
+df_recidiva = pd.DataFrame(data_recidiva)
