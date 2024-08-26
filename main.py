@@ -301,10 +301,22 @@ category_order_recidiva = df_recidiva['RECIDIVA'].tolist()
 st.subheader("Distribución de RECIDIVA")
 with card_container(key="chart2"):
     st.vega_lite_chart(df_recidiva, {
-        'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(0, 153, 76)', 'cornerRadiusEnd': 4 },
+        'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(0, 100, 76)', 'cornerRadiusEnd': 4 },
         'encoding': {
             'x': {'field': 'RECIDIVA', 'type': 'ordinal', 'axis': {'title': 'RECIDIVA'}, 'sort': category_order_recidiva},
             'y': {'field': 'Cantidad', 'type': 'quantitative', 'axis': {'title': 'Cantidad', 'grid': False}},
         },
     }, use_container_width=True)
 
+### RE1
+
+# Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
+resumen_counts_re1 = df['RE1'].value_counts().reset_index()
+resumen_counts_re1.columns = ['RE1', 'Cantidad']
+
+
+# Mostrar el conteo de valores para verificar
+st.write("Conteo de valores en 'RE1':")
+#st.write(resumen_counts)
+
+ui.table(data=resumen_counts_re1, maxHeight=300)
