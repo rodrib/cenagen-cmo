@@ -289,3 +289,22 @@ data_recidiva = {
 
 # Crear el DataFrame
 df_recidiva = pd.DataFrame(data_recidiva)
+
+
+# Ordenar los datos por 'Cantidad' de mayor a menor
+df_recidiva = df_recidiva.sort_values(by='Cantidad', ascending=False)
+
+# Obtener el orden de categorías
+category_order_recidiva = df_recidiva['RECIDIVA'].tolist()
+
+# Mostrar el gráfico basado en Proyecto/tesis/Resumen
+st.subheader("Distribución de RECIDIVA")
+with card_container(key="chart2"):
+    st.vega_lite_chart(df_recidiva, {
+        'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(0, 153, 76)', 'cornerRadiusEnd': 4 },
+        'encoding': {
+            'x': {'field': 'RECIDIVA', 'type': 'ordinal', 'axis': {'title': 'RECIDIVA'}, 'sort': category_order_recidiva},
+            'y': {'field': 'Cantidad', 'type': 'quantitative', 'axis': {'title': 'Cantidad', 'grid': False}},
+        },
+    }, use_container_width=True)
+
