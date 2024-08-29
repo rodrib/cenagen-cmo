@@ -39,7 +39,25 @@ df = pd.read_csv(file_path)
 df = df.dropna()
 
 
+# Verificar el tipo de dato de la columna 'EDAD'
+print("el tipo es", df['EDAD'].dtype)
 
+unique_values = df['EDAD'].unique()
+print(unique_values)
+
+# Eliminar espacios en blanco al principio y al final
+df['EDAD'] = df['EDAD'].str.strip()
+
+# Convertir a numérico, forzando los valores no convertibles a NaN
+df['EDAD'] = pd.to_numeric(df['EDAD'], errors='coerce')
+
+# Eliminar filas con NaN (donde la conversión falló)
+df = df.dropna(subset=['EDAD'])
+
+# Convertir la columna a enteros (si es necesario)
+df['EDAD'] = df['EDAD'].astype(int)
+
+print(df['EDAD'].dtype)
 ###########
 # Creamos el objeto Data de Vizzu
 data = Data()
@@ -66,7 +84,7 @@ story.add_slide(
                 {
                     "coordSystem": "cartesian",
                     "geometry": "rectangle",
-                    "x": "age",
+                    "x": "EDAD",
                     "y": {"set": "count()", "range": {"min": "auto", "max": "110%"},"title":"Medals"},
                     "color": None,
                     "lightness": None,
@@ -76,8 +94,8 @@ story.add_slide(
                     "align": "none",
                     "orientation": "horizontal",
                     "label": "count()",
-                    "title": "Medals per age",
-                    "subtitle":"40 medallists under 18 years old and 5 over 50 years old",
+                    "title": "Test Cenagem",
+                    "subtitle":"Dataset de pacientes con CMO",
                 }
             ),
             Style(
