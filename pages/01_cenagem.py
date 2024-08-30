@@ -1,107 +1,83 @@
-import streamlit as st
 import pandas as pd
-from ipyvizzu import Config, Data, Style # https://ipyvizzu.vizzuhq.com/latest/
-from ipyvizzustory import Story, Slide, Step # https://vizzu-story.vizzuhq.com/latest/
-import math
- 
-# Definimos los parámetros de configuración de la aplicación
-st.set_page_config(
-    page_title="Cenagem", #Título de la página
-    page_icon="🏃‍➡️", # Ícono
-    layout="wide", # Forma de layout ancho o compacto
-    initial_sidebar_state="expanded" # Definimos si el sidebar aparece expandido o colapsado
-)
+from ipyvizzu import Config, Data, Style
+from ipyvizzustory import Story, Slide, Step
 
-estilos = """
-        <style>
-        h2,
-            div[data-testid="stMetricValue"]{
-            color: #735497
-            }
-        body {
-            background-color: #f8f8f9
-        }
-        </style>
-"""
-st.html(estilos)
-
-######### dataframe
-
-import pandas as pd
-
-# Especifica la ruta del archivo CSV
-file_path = 'etl_cenagen1.csv'
-
-# Leer el archivo CSV y convertirlo en un DataFrame
-df = pd.read_csv(file_path)
-
-# Eliminar las filas con valores nulos
-df = df.dropna()
-
-
-# Verificar el tipo de dato de la columna 'EDAD'
-print("el tipo es", df['EDAD'].dtype)
-
-unique_values = df['EDAD'].unique()
-print(unique_values)
-
-# Eliminar espacios en blanco al principio y al final
-df['EDAD'] = df['EDAD'].str.strip()
-
-# Convertir a numérico, forzando los valores no convertibles a NaN
-df['EDAD'] = pd.to_numeric(df['EDAD'], errors='coerce')
-
-# Eliminar filas con NaN (donde la conversión falló)
-df = df.dropna(subset=['EDAD'])
-
-# Convertir la columna a enteros (si es necesario)
-df['EDAD'] = df['EDAD'].astype(int)
-
-print(df['EDAD'].dtype)
-###########
-# Creamos el objeto Data de Vizzu
+d_types = {
+    "CASO": str,
+    "CODIGO": str,
+    "P": str,
+    "HC": str,
+    "DERIVA": str,
+    "Estudio": str,
+    "Resultado": str,
+    "GRUPO": str,
+    "ETNIA": str,
+    "EDAD": str,
+    "CM": str,
+    "RECIDIVA": str,
+    "SINCRO": str,
+    "DX1": str,
+    "DX2": str,
+    "HISTO1": str,
+    "HISTO2": str,
+    "GRADO1": str,
+    "GRADO2": str,
+    "RE1": str,
+    "RE2": str,
+    "RP1": str,
+    "RP2": str,
+    "HER21": str,
+    "HER22": str,
+    "HISTFAM ": str,
+    "CONSANGU": str,
+    "GANGLIOS1": str,
+    "GANGLIOS2": str,
+    "Region": str,
+    "Region-corregida": str,
+    "Region-1": str,
+    "Region-2": str,
+    "nombre-genes": str,
+    "input_clinvar": str,
+    "gen-clinvar": str,
+    "Gene": str,
+    "ID": str,
+    "Accession": str,
+    "Variation Name": str,
+    "gene_name_variant_region": str,
+    "Germline Classification": str,
+    "Links": str,
+}
+df = pd.read_csv("etl_cenagen1.csv", dtype=d_types)
 data = Data()
-# Adicionamos los datos ordenados por edad
-data.add_df(df.sort_values('EDAD'))
+data.add_df(df)
 
-# Creamos el objeto story con la Data cargada
 story = Story(data)
-
-# Definimos el ancho y alto del visor de Vizzu
-story.set_size(1200, 600)
-# Hanbilitamos el tooltip
+story.set_size(640, 480)
 story.set_feature("tooltip", True)
 
-
-#### van los slides
-
-# Comenzamos a adicionar los slides de nuestra presentación
 story.add_slide(
     Slide(
         Step(
-            Data.filter("(record['EDAD'] > 0)"), # Quitamos las edades en cero que corresponden a competencias en equipos
+            Data.filter(None),
             Config(
                 {
                     "coordSystem": "cartesian",
                     "geometry": "rectangle",
-                    "x": "EDAD",
-                    "y": {"set": "count()", "range": {"min": "auto", "max": "110%"},"title":"Medals"},
-                    "color": None,
+                    "x": ["nombre-genes", "RECIDIVA"],
+                    "y": {"set": "count()", "range": {"min": "auto", "max": "110%"}},
+                    "color": "RECIDIVA",
                     "lightness": None,
                     "size": None,
                     "noop": None,
                     "split": False,
                     "align": "none",
                     "orientation": "horizontal",
-                    "label": "count()",
-                    "title": "Test Cenagem",
-                    "subtitle":"Dataset de pacientes con CMO",
+                    "label": None,
+                    "sort": "none",
                 }
             ),
             Style(
                 {
-                    "fontFamily": 'Poppins',
-                    "title": {"fontSize": 30,"color":'#735497FF',"fontWeight":"bold"},
                     "plot": {
                         "yAxis": {"label": {"numberScale": "shortScaleSymbolUS"}},
                         "xAxis": {"label": {"numberScale": "shortScaleSymbolUS"}},
@@ -114,17 +90,194 @@ story.add_slide(
                             "rectangleSpacing": None,
                             "circleMinRadius": 0.005,
                             "borderOpacity": 1,
-                            "colorPalette": "#735497",
+                            "colorPalette": "#03ae71 #f4941b #f4c204 #d49664 #f25456 #9e67ab #bca604 #846e1c #fc763c #b462ac #f492fc #bc4a94 #9c7ef4 #9c52b4 #6ca2fc #5c6ebc #7c868c #ac968c #4c7450 #ac7a4c #7cae54 #4c7450 #9c1a6c #ac3e94 #b41204",
                         },
                     }
                 }
             ),
-            
+        )
+    )
+)
+story.add_slide(
+    Slide(
+        Step(
+            Data.filter(None),
+            Config(
+                {
+                    "coordSystem": "cartesian",
+                    "geometry": "rectangle",
+                    "x": ["ETNIA", "nombre-genes"],
+                    "y": {"set": "count()", "range": {"min": "auto", "max": "110%"}},
+                    "color": "ETNIA",
+                    "lightness": None,
+                    "size": None,
+                    "noop": None,
+                    "split": False,
+                    "align": "none",
+                    "orientation": "horizontal",
+                    "label": None,
+                    "sort": "none",
+                }
+            ),
+            Style(
+                {
+                    "plot": {
+                        "yAxis": {"label": {"numberScale": "shortScaleSymbolUS"}},
+                        "xAxis": {"label": {"numberScale": "shortScaleSymbolUS"}},
+                        "marker": {
+                            "label": {
+                                "numberFormat": "prefixed",
+                                "maxFractionDigits": "1",
+                                "numberScale": "shortScaleSymbolUS",
+                            },
+                            "rectangleSpacing": None,
+                            "circleMinRadius": 0.005,
+                            "borderOpacity": 1,
+                            "colorPalette": "#694db1 #029a67 #fa7f16 #f1c226 #d06c29 #d19565 #f1474d #b6a720 #807126 #f4714d #b55ca9 #f58ffc #bc458e #9c7cee #9c4fb4 #6f9ffc #5e6cbc #79858d #a99789 #4c7350 #ae7a43 #7bb057 #497655 #9d1069 #ae3894 #b20000",
+                        },
+                    }
+                }
+            ),
+        )
+    )
+)
+story.add_slide(
+    Slide(
+        Step(
+            Data.filter(None),
+            Config(
+                {
+                    "coordSystem": "cartesian",
+                    "geometry": "rectangle",
+                    "x": "count()",
+                    "y": {
+                        "set": ["CM", "nombre-genes"],
+                        "range": {"min": "auto", "max": "auto"},
+                    },
+                    "color": "CM",
+                    "lightness": None,
+                    "size": None,
+                    "noop": None,
+                    "split": False,
+                    "align": "none",
+                    "orientation": "vertical",
+                    "label": None,
+                    "sort": "none",
+                }
+            ),
+            Style(
+                {
+                    "plot": {
+                        "yAxis": {"label": {"numberScale": "shortScaleSymbolUS"}},
+                        "xAxis": {"label": {"numberScale": "shortScaleSymbolUS"}},
+                        "marker": {
+                            "label": {
+                                "numberFormat": "prefixed",
+                                "maxFractionDigits": "1",
+                                "numberScale": "shortScaleSymbolUS",
+                            },
+                            "rectangleSpacing": None,
+                            "circleMinRadius": 0.005,
+                            "borderOpacity": 1,
+                            "colorPalette": "#eb0000 #fd7c4b #cc9577 #fda276 #d5895b #dc9376 #a46850 #fd723c #e97c5e #b3654e #b75121 #966443 #d15948 #fd6a4a #fe9f8a #bb5b58 #fb786c #fc5a54 #fd8047 #fe4e49 #ff8d69 #dab18f #e9908f #9e8171 #99746b",
+                        },
+                    }
+                }
+            ),
+        )
+    )
+)
+story.add_slide(
+    Slide(
+        Step(
+            Data.filter(None),
+            Config(
+                {
+                    "coordSystem": "polar",
+                    "geometry": "rectangle",
+                    "x": ["EDAD", "count()"],
+                    "y": {
+                        "set": "nombre-genes",
+                        "range": {"min": "-50%", "max": "auto"},
+                    },
+                    "color": "EDAD",
+                    "lightness": None,
+                    "size": None,
+                    "noop": None,
+                    "split": False,
+                    "align": "stretch",
+                    "orientation": "vertical",
+                    "label": None,
+                    "sort": "none",
+                }
+            ),
+            Style(
+                {
+                    "plot": {
+                        "yAxis": {"label": {"numberScale": "shortScaleSymbolUS"}},
+                        "xAxis": {"label": {"numberScale": "shortScaleSymbolUS"}},
+                        "marker": {
+                            "label": {
+                                "numberFormat": "prefixed",
+                                "maxFractionDigits": "1",
+                                "numberScale": "shortScaleSymbolUS",
+                            },
+                            "rectangleSpacing": 0,
+                            "circleMinRadius": 0.015,
+                            "borderOpacity": 0,
+                            "colorPalette": "#3394b6 #5ab4cb #4199b9 #599f9c #bf7caf #b6918b #8785a9 #76b4ce #8f8dba #6b789e #6b5c78 #757284 #8ea5be #8498aa #778393 #b897a4 #64ad9f #977675 #65dbd5",
+                        },
+                    }
+                }
+            ),
+        )
+    )
+)
+story.add_slide(
+    Slide(
+        Step(
+            Data.filter(None),
+            Config(
+                {
+                    "coordSystem": "cartesian",
+                    "geometry": "rectangle",
+                    "x": ["ID", "count()"],
+                    "y": {
+                        "set": "nombre-genes",
+                        "range": {"min": "auto", "max": "auto"},
+                    },
+                    "color": "ID",
+                    "lightness": None,
+                    "size": None,
+                    "noop": None,
+                    "split": True,
+                    "align": "none",
+                    "orientation": "vertical",
+                    "label": None,
+                    "sort": "none",
+                }
+            ),
+            Style(
+                {
+                    "plot": {
+                        "yAxis": {"label": {"numberScale": "shortScaleSymbolUS"}},
+                        "xAxis": {"label": {"numberScale": "shortScaleSymbolUS"}},
+                        "marker": {
+                            "label": {
+                                "numberFormat": "prefixed",
+                                "maxFractionDigits": "1",
+                                "numberScale": "shortScaleSymbolUS",
+                            },
+                            "rectangleSpacing": None,
+                            "circleMinRadius": 0.005,
+                            "borderOpacity": 1,
+                            "colorPalette": "#e5b96c #d0ae5e #f1cc6a #dac7a8 #d79984 #ff982c #d0f58e #bdbce4 #66bcce #80a4df #ceab80 #ff6b87 #e6a273 #e9c994 #cc9065 #d6a258 #e8ac97 #f5b887 #f8cf93 #f5b9b0 #ff91a6",
+                        },
+                    }
+                }
+            ),
         )
     )
 )
 
-cols = st.columns([2,10,2])
-
-with cols[0]:
-    story.play()
+story.play()
