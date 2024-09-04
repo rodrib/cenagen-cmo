@@ -57,7 +57,7 @@ else:
     ui.table(data=df_filtrado.head(), maxHeight=300)
 
 # Renderizar la tabla
-st.write(ui.table)
+#st.write(ui.table)
 
 
 #### Graficos
@@ -75,7 +75,7 @@ st.write("Conteo de valores en 'CM':")
 
 ui.table(data=resumen_counts, maxHeight=300)
 
-st.write(ui.table)
+#st.write(ui.table)
 
 
 data = {
@@ -121,7 +121,7 @@ st.write("Conteo de valores en 'ETNIA':")
 
 ui.table(data=resumen_counts_etnia, maxHeight=300)
 
-st.write(ui.table)
+
 
 # Crear el diccionario con los datos
 data_etnia = {
