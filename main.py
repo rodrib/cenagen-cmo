@@ -64,16 +64,22 @@ else:
 
 
 
+# Mostrar el DataFrame filtrado en la interfaz de usuario
+st.subheader(f"Cancer de Mama vs Cantidad")
 
 # Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
 resumen_counts = df['CM'].value_counts().reset_index()
 resumen_counts.columns = ['CM', 'Cantidad']
 
 # Mostrar el conteo de valores para verificar
-st.write("Conteo de valores en 'CM':")
+#st.write("Conteo de valores en 'CM':")
 #st.write(resumen_counts)
+# Opción para mostrar todos los valores
+mostrar_todos1 = st.checkbox("Mostrar todos los valores en forma de tabla", key="mostrar_todos_1")
 
-ui.table(data=resumen_counts, maxHeight=300)
+if mostrar_todos1:
+    ui.table(data=resumen_counts, maxHeight=300)
+
 
 #st.write(ui.table)
 
