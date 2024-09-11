@@ -21,3 +21,22 @@ df = pd.read_csv(url)
 
 # Mostrar el DataFrame usando st.dataframe()
 st.dataframe(df)  # Esta función permite desplazarse por la tabla si es necesario
+
+
+# Mostrar las columnas del DataFrame en Streamlit
+st.write("Columnas disponibles en el DataFrame:")
+st.write(df.columns)
+
+# Seleccionar columnas usando Streamlit
+columnas_seleccionadas = st.multiselect(
+    'Selecciona las columnas que deseas ver:',
+    df.columns
+)
+
+# Mostrar el nuevo DataFrame con las columnas seleccionadas
+if columnas_seleccionadas:
+    nuevo_df = df[columnas_seleccionadas]
+    st.write("Nuevo DataFrame con las columnas seleccionadas:")
+    st.dataframe(nuevo_df)
+else:
+    st.write("Por favor, selecciona al menos una columna.")
