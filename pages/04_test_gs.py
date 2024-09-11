@@ -40,3 +40,20 @@ if columnas_seleccionadas:
     st.dataframe(nuevo_df)
 else:
     st.write("Por favor, selecciona al menos una columna.")
+
+####
+# Subtítulo "Genes vs Impacto"
+st.subheader("Genes vs Impacto")
+
+# Filtro por la columna "Tiene resultado"
+tiene_resultado = st.selectbox('Filtrar por "Tiene resultado":', options=['SI', 'NO'])
+
+# Filtrar el DataFrame si el usuario selecciona "SI"
+if tiene_resultado == 'SI':
+    df_filtrado = df[df['Tiene resultado'] == 'SI'][['Gen', 'tipo', 'EXON', 'var-gen', 'var-prot', 'Impacto', 'Tiene otra?']]
+else:
+    df_filtrado = df[df['Tiene resultado'] == 'NO'][['Gen', 'tipo', 'EXON', 'var-gen', 'var-prot', 'Impacto', 'Tiene otra?']]
+
+# Mostrar el nuevo DataFrame
+st.write("Nuevo DataFrame filtrado:")
+st.dataframe(df_filtrado)
