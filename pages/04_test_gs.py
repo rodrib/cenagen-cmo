@@ -23,6 +23,15 @@ df = pd.read_csv(url)
 st.dataframe(df)  # Esta función permite desplazarse por la tabla si es necesario
 
 
+# Opción para mostrar todos los valores
+mostrar_todos = st.checkbox("Mostrar todos los valores")
+
+
+
+if mostrar_todos:
+    st.dataframe(df) 
+
+
 # Mostrar las columnas del DataFrame en Streamlit
 st.write("Columnas disponibles en el DataFrame:")
 st.write(df.columns)
