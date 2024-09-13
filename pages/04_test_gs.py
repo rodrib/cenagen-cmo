@@ -69,6 +69,9 @@ st.dataframe(df_filtrado)
 
 ##### interactivo
 
+# Subtítulo "Genes vs Impacto"
+st.subheader("Graficos animados")
+
 import pandas as pd
 from ipyvizzu import Config, Data, Style
 from ipyvizzustory import Story, Slide, Step
