@@ -72,6 +72,8 @@ st.dataframe(df_filtrado)
 # Subtítulo "Genes vs Impacto"
 st.subheader("Graficos animados")
 
+
+
 import pandas as pd
 from ipyvizzu import Config, Data, Style
 from ipyvizzustory import Story, Slide, Step
@@ -446,3 +448,27 @@ story.add_slide(
 )
 
 story.play()
+
+
+# Encabezado
+st.header("Estadisticas de NGS en Cancer")
+medals = 10 #len(df)
+countries = 13 #df['country'].nunique()
+disciplines = 12 # df['discipline'].nunique()
+ages = 20 #df[df['age'].astype(int)>0]['age'].nunique()
+agesMin = 1 #df[df['age'].astype(int)>0]['age'].min()
+agesMax = 11 #df[df['age'].astype(int)>0]['age'].max()
+cols = st.columns([2,10,2])
+with cols[0]:
+    st.image("https://salud.misiones.gob.ar/wp-content/uploads/2019/03/INSTITUO-DE-GENETICA.jpg")
+    st.info("Created with ❤️ by [Rodrigo Bogado](https://www.linkedin.com/in/germancastano/)")    
+with cols[1]:
+    story.play()
+    st.info("Click on the play button to see every slide...enjoy 😁")
+with cols[2]:
+    st.metric("Total Medals:",f"{medals:,.0f}")
+    st.metric("Countries:",f"{countries:,.0f}")
+    st.metric("Disciplines:",f"{disciplines:,.0f}")
+    st.metric("Ages:",f"{ages:,.0f}")
+    st.metric("Younger:",f"{agesMin} years old")
+    st.metric("Older:",f"{agesMax} years old")

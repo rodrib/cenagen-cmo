@@ -52,7 +52,7 @@ data = Data()
 data.add_df(df)
 
 story = Story(data)
-story.set_size(640, 480)
+story.set_size(1200, 600)
 story.set_feature("tooltip", True)
 
 story.add_slide(
