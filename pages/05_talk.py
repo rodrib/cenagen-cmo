@@ -32,7 +32,7 @@ st.set_page_config(
     initial_sidebar_state="expanded" # Definimos si el sidebar aparece expandido o colapsado
 )
 
-st.header('Habla con tus datos')
+st.header('Publichart')
 
 # Menú lateral
 with st.sidebar:
@@ -97,3 +97,4 @@ if prompt:
         st.write(respuesta)                                    
     # Agregar respuesta de asistente al historial de chat
     st.session_state.messages.append({"role": "assistant", "content": respuesta})
+    

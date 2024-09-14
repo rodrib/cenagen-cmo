@@ -337,3 +337,7 @@ st.write("Conteo de valores en 'RE1':")
 #st.write(resumen_counts)
 
 ui.table(data=resumen_counts_re1, maxHeight=300)
+
+
+
+########################## Nuevo #################
