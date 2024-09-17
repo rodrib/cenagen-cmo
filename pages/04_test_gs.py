@@ -67,6 +67,10 @@ else:
 st.write("Nuevo DataFrame filtrado:")
 st.dataframe(df_filtrado)
 
+cant_genes_unicos = len(df_filtrado['Gen'].unique())
+
+
+
 ##### interactivo
 
 # Subtítulo "Genes vs Impacto"
@@ -453,7 +457,7 @@ story.play()
 # Encabezado
 st.header("Estadisticas de NGS en Cancer")
 medals = 10 #len(df)
-countries = 13 #df['country'].nunique()
+cantidad_genes = cant_genes_unicos
 disciplines = 12 # df['discipline'].nunique()
 ages = 20 #df[df['age'].astype(int)>0]['age'].nunique()
 agesMin = 1 #df[df['age'].astype(int)>0]['age'].min()
@@ -467,7 +471,7 @@ with cols[1]:
     st.info("Click on the play button to see every slide...enjoy 😁")
 with cols[2]:
     st.metric("Total Medals:",f"{medals:,.0f}")
-    st.metric("Countries:",f"{countries:,.0f}")
+    st.metric("Cantidad de Genes:",f"{cantidad_genes:,.0f}")
     st.metric("Disciplines:",f"{disciplines:,.0f}")
     st.metric("Ages:",f"{ages:,.0f}")
     st.metric("Younger:",f"{agesMin} years old")
