@@ -67,6 +67,10 @@ else:
 st.write("Nuevo DataFrame filtrado:")
 st.dataframe(df_filtrado)
 
+
+### Valores numericos de los indicadores de los estudios realizados
+num_filas_pac = len(df_filtrado)
+
 cant_genes_unicos = len(df_filtrado['Gen'].unique())
 
 
@@ -456,7 +460,7 @@ story.play()
 
 # Encabezado
 st.header("Estadisticas de NGS en Cancer")
-medals = 10 #len(df)
+cantidad_pacientes = num_filas_pac
 cantidad_genes = cant_genes_unicos
 disciplines = 12 # df['discipline'].nunique()
 ages = 20 #df[df['age'].astype(int)>0]['age'].nunique()
@@ -470,7 +474,7 @@ with cols[1]:
     story.play()
     st.info("Click on the play button to see every slide...enjoy 😁")
 with cols[2]:
-    st.metric("Total Medals:",f"{medals:,.0f}")
+    st.metric("Total de Pacientes:",f"{cantidad_pacientes:,.0f}")
     st.metric("Cantidad de Genes:",f"{cantidad_genes:,.0f}")
     st.metric("Disciplines:",f"{disciplines:,.0f}")
     st.metric("Ages:",f"{ages:,.0f}")
