@@ -131,7 +131,6 @@ resumen_counts_etnia.columns = ['ETNIA', 'Cantidad']
 
 
 
-ui.table(data=resumen_counts_etnia, maxHeight=300)
 
 
 
@@ -151,6 +150,11 @@ df_etnia = df_etnia.sort_values(by='Cantidad', ascending=False)
 category_order_etnia = df_etnia['ETNIA'].tolist()
 
 mostrar_todos2 = st.checkbox("Mostrar todos los valores en forma de tabla", key="mostrar_todos_2")
+
+if mostrar_todos2:
+    #ui.table(data=resumen_counts, maxHeight=300)
+    ui.table(data=resumen_counts_etnia, maxHeight=300)
+
 
 # Mostrar el gráfico basado en Proyecto/tesis/Resumen
 st.subheader("Distribución de ETNIA")
