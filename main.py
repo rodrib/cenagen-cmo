@@ -173,15 +173,17 @@ with card_container(key="chart2"):
 
 ### EDAD
 
+st.subheader("Cancer segun la EDAD")
+
 # Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
 resumen_counts_edad = df['EDAD'].value_counts().reset_index()
 resumen_counts_edad.columns = ['EDAD', 'Cantidad']
 
 # Mostrar el conteo de valores para verificar
-st.write("Conteo de valores en 'EDAD':")
+
 #st.write(resumen_counts)
 
-ui.table(data=resumen_counts_edad, maxHeight=300)
+
 
 
 # Crear el diccionario con los datos
@@ -207,6 +209,12 @@ df_edad = df_edad.sort_values(by='Cantidad', ascending=False)
 
 # Obtener el orden de categorías
 category_order_edad = df_edad['EDAD'].tolist()
+
+
+mostrar_todos3 = st.checkbox("Mostrar todos los valores en forma de tabla", key="mostrar_todos_3")
+
+if mostrar_todos3:
+    ui.table(data=resumen_counts_edad, maxHeight=300)
 
 # Mostrar el gráfico basado en Proyecto/tesis/Resumen
 st.subheader("Distribución de EDAD")
