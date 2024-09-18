@@ -476,7 +476,7 @@ with cols[1]:
 with cols[2]:
     st.metric("Total de Pacientes:",f"{cantidad_pacientes:,.0f}")
     st.metric("Cantidad de Genes:",f"{cantidad_genes:,.0f}")
-    st.metric("Disciplines:",f"{disciplines:,.0f}")
-    st.metric("Ages:",f"{ages:,.0f}")
-    st.metric("Younger:",f"{agesMin} years old")
-    st.metric("Older:",f"{agesMax} years old")
+    st.metric("Positivos:",f"{disciplines:,.0f}")
+    st.metric("Negativos:",f"{ages:,.0f}")
+    st.metric("Mas Joven:",f"{agesMin} years old")
+    st.metric("Mas Viejo:",f"{agesMax} years old")
