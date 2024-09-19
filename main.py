@@ -352,16 +352,24 @@ with card_container(key="chart2"):
 
 ### RE1
 
+st.subheader("Cancer segun RE1 (Receptores de Estrogeno)")
+
 # Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
 resumen_counts_re1 = df['RE1'].value_counts().reset_index()
 resumen_counts_re1.columns = ['RE1', 'Cantidad']
 
 
 # Mostrar el conteo de valores para verificar
-st.write("Conteo de valores en 'RE1':")
+#st.write("Conteo de valores en 'RE1':")
 #st.write(resumen_counts)
 
-ui.table(data=resumen_counts_re1, maxHeight=300)
+#ui.table(data=resumen_counts_re1, maxHeight=300)
+
+
+mostrar_todos6 = st.checkbox("Mostrar todos los valores en forma de tabla", key="mostrar_todos_6")
+
+if mostrar_todos6:
+    ui.table(data=resumen_counts_re1, maxHeight=300)
 
 
 
