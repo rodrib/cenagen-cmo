@@ -229,17 +229,22 @@ with card_container(key="chart2"):
 
 #### Accesion
 
-
+st.subheader("Cancer segun las Variantes(Accession)")
 
 # Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
 resumen_counts_accession = df['Accession'].value_counts().reset_index()
 resumen_counts_accession.columns = ['Accession', 'Cantidad']
 
 # Mostrar el conteo de valores para verificar
-st.write("Conteo de valores en 'Accession':")
+#st.write("Conteo de valores en 'Accession':")
 #st.write(resumen_counts)
 
-ui.table(data=resumen_counts_accession, maxHeight=300)
+mostrar_todos4 = st.checkbox("Mostrar todos los valores en forma de tabla", key="mostrar_todos_4")
+
+if mostrar_todos4:
+    ui.table(data=resumen_counts_accession, maxHeight=300)
+
+
 
 # Datos proporcionados
 data_accesion = {
