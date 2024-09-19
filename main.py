@@ -220,7 +220,7 @@ if mostrar_todos3:
 st.subheader("Distribución de EDAD")
 with card_container(key="chart2"):
     st.vega_lite_chart(df_edad, {
-        'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(0, 153, 76)', 'cornerRadiusEnd': 4 },
+        'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(80, 214, 115)', 'cornerRadiusEnd': 4 },
         'encoding': {
             'x': {'field': 'EDAD', 'type': 'ordinal', 'axis': {'title': 'EDAD'}, 'sort': category_order_edad},
             'y': {'field': 'Cantidad', 'type': 'quantitative', 'axis': {'title': 'Cantidad', 'grid': False}},
@@ -291,7 +291,7 @@ category_order_accession = df_accesion['Accession'].tolist()
 st.subheader("Distribución de Variantes")
 with card_container(key="chart2"):
     st.vega_lite_chart(df_accesion, {
-        'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(0, 153, 76)', 'cornerRadiusEnd': 4 },
+        'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(164, 214, 80)', 'cornerRadiusEnd': 4 },
         'encoding': {
             'x': {'field': 'Accession', 'type': 'ordinal', 'axis': {'title': 'Accession'}, 'sort': category_order_accession},
             'y': {'field': 'Cantidad', 'type': 'quantitative', 'axis': {'title': 'Cantidad', 'grid': False}},
@@ -301,15 +301,17 @@ with card_container(key="chart2"):
 
 ### RECIDIVA
 
+st.subheader("Cancer segun RECIDIVA")
+
 # Contar los valores únicos en la columna 'Proyecto/tesis/Resumen'
 resumen_counts_recidiva = df['RECIDIVA'].value_counts().reset_index()
 resumen_counts_recidiva.columns = ['RECIDIVA', 'Cantidad']
 
 # Mostrar el conteo de valores para verificar
-st.write("Conteo de valores en 'RECIDIVA':")
+#st.write("Conteo de valores en 'RECIDIVA':")
 #st.write(resumen_counts)
 
-ui.table(data=resumen_counts_recidiva, maxHeight=300)
+
 
 # Datos proporcionados
 data_recidiva = {
@@ -330,6 +332,12 @@ df_recidiva = df_recidiva.sort_values(by='Cantidad', ascending=False)
 
 # Obtener el orden de categorías
 category_order_recidiva = df_recidiva['RECIDIVA'].tolist()
+
+
+mostrar_todos5 = st.checkbox("Mostrar todos los valores en forma de tabla", key="mostrar_todos_5")
+
+if mostrar_todos5:
+    ui.table(data=resumen_counts_recidiva, maxHeight=300)
 
 # Mostrar el gráfico basado en Proyecto/tesis/Resumen
 st.subheader("Distribución de RECIDIVA")
