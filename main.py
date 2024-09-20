@@ -343,7 +343,7 @@ if mostrar_todos5:
 st.subheader("Distribución de RECIDIVA")
 with card_container(key="chart2"):
     st.vega_lite_chart(df_recidiva, {
-        'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(0, 100, 76)', 'cornerRadiusEnd': 4 },
+        'mark': {'type': 'bar', 'tooltip': True, 'fill': 'rgb(238, 221, 14)', 'cornerRadiusEnd': 4 },
         'encoding': {
             'x': {'field': 'RECIDIVA', 'type': 'ordinal', 'axis': {'title': 'RECIDIVA'}, 'sort': category_order_recidiva},
             'y': {'field': 'Cantidad', 'type': 'quantitative', 'axis': {'title': 'Cantidad', 'grid': False}},
