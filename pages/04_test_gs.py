@@ -469,7 +469,7 @@ agesMin = 1 #df[df['age'].astype(int)>0]['age'].min()
 agesMax = 11 #df[df['age'].astype(int)>0]['age'].max()
 cols = st.columns([2,10,2])
 with cols[0]:
-    st.image("https://salud.misiones.gob.ar/wp-content/uploads/2019/03/INSTITUO-DE-GENETICA.jpg")
+    st.image("https://gremialweb.com/wp-content/uploads/2024/02/Genetica-501x445.png")
     st.info("Created with ❤️ by [Rodrigo Bogado](https://www.linkedin.com/in/germancastano/)")    
 with cols[1]:
     story.play()
