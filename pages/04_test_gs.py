@@ -2,13 +2,14 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px 
 
-# Definimos los parámetros de configuración de la aplicación
-st.set_page_config(
-    page_title="Demo carga datos desde Google Sheets", #Título de la página
-    page_icon="📊", # Ícono
-    layout="wide", # Forma de layout ancho o compacto
-    initial_sidebar_state="expanded" # Definimos si el sidebar aparece expandido o colapsado
-)
+# Page title
+st.set_page_config(page_title='Analisis de datos del CENAGEN', page_icon='📊',
+                   layout="wide", # Forma de layout ancho o compacto
+                    initial_sidebar_state="expanded" # Definimos si el sidebar aparece expandido o colapsado
+                   )
+st.title('📊 Analisis de datos del IGeHM')
+
+
 
 gsheetid='1jAdbksm3fu5uVE7NOGe7LtSSJBjQGEPzc0c44f9Ud4s'
 sheetid='0'
