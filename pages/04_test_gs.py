@@ -97,9 +97,9 @@ d_types = {
     "Impacto": str,
     "Tiene otra?": str,
 }
-df = pd.read_csv("pages\igehm_m1.csv", dtype=d_types)
+df1 = pd.read_csv("pages\igehm_m1.csv", dtype=d_types)
 data = Data()
-data.add_df(df)
+data.add_df(df1)
 
 story = Story(data)
 story.set_size(640, 480)
