@@ -98,6 +98,10 @@ d_types = {
     "Tiene otra?": str,
 }
 df1 = pd.read_csv("pages\igehm_m1.csv", dtype=d_types)
+
+st.dataframe(df1)
+
+
 data = Data()
 data.add_df(df1)
 
