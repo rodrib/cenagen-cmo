@@ -97,7 +97,11 @@ d_types = {
     "Impacto": str,
     "Tiene otra?": str,
 }
-df1 = pd.read_csv("pages\igehm_m1.csv", dtype=d_types)
+
+
+#df1 = pd.read_csv("pages\igehm_m1.csv", dtype=d_types)
+import os
+df1 = pd.read_csv(os.path.join("pages", "igehm_m1.csv"), dtype=d_types)
 
 st.dataframe(df1)
 
