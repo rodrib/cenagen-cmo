@@ -5,7 +5,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 # Cargar tu dataset
 # Reemplaza 'ruta/del/tu/dataset.csv' con la ruta correcta de tu archivo CSV
-df = pd.read_csv('pages\data_cancer.csv')
+df = pd.read_csv('data_cancer.csv')
 
 # Eliminar filas con NaN en la columna 'HC'
 df = df.dropna(subset=['HC'])
